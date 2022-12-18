@@ -1,15 +1,12 @@
 <template>
-    <component :is="as"></component>
+    <component :is="as" :name="name" :value="values.values[name]" @input="(e) => updateVal(name,e.target.value)"></component>
 </template>
 
 <script setup>
+import {inject} from 'vue';
 
 defineProps({
     name:{
-        type: String,
-        required:true
-    },
-    type: {
         type: String,
         required:true
     },
@@ -17,15 +14,10 @@ defineProps({
     as: {
         type: String,
         required: true,
-        default: 'input'
-    },
-
-    placeholder: {
-        type: String,
-        default:''
     },
 
 })
-
 const values = inject('values');
+const updateVal = inject('update-val');
+
 </script>
